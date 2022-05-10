@@ -49,50 +49,56 @@
         <a class="link" th:href="@{/register/showRegistrationForm}">Add User</a>
     </div>
 
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th>Username</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Role(-s)</th>
-            <th>Last message</th>
-            <th>Action</th>
-        </tr>
-        </thead>
+    <div style="padding: 8px;">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Role(-s)</th>
+                <th>Messages</th>
+                <th style="text-align: center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
 
-        <tbody>
-        <tr th:each="user : ${users}">
+                <td th:text="${user.userName}"/>
+                <td th:text="${user.firstName}"/>
+                <td th:text="${user.lastName}"/>
+                <td th:text="${user.email}"/>
+                <td th:text="${user.roles}"/>
+                <td th:text="${user.getMessages().size()}"/>
+                <!--            <td style="text-align: center">-->
+                <!--                <a th:href="@{'/users/download/'+${user.id}}">-->
+                <!--                    <span class="glyphicon glyphicon-save shadow" style="color: olive; font-size: 27px;"></span>-->
+                <!--                </a>-->
+                <!--            </td>-->
+                <td>
+                    <div style="text-align: center">
+                        <!-- Add "update" button/link -->
+                        <a class="inline" th:href="@{'/users/showFormForUpdate/'+${user.id}}">
+                        <span class="glyphicon glyphicon-pencil shadow"
+                              style="color: #ff7f50; font-size: 27px; margin-right: 20px;"></span>
+                        </a>
+                        <!-- Add "delete" button/link -->
+                        <a class="inline"
+                           onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false"
+                           th:href="@{'/users/delete/'+${user.id}}">
+                            <span class="glyphicon glyphicon-trash shadow"
+                                  style="color: coral; font-size: 27px;"></span>
+                        </a>
+                    </div>
 
-            <td th:text="${user.userName}"/>
-            <td th:text="${user.firstName}"/>
-            <td th:text="${user.lastName}"/>
-            <td th:text="${user.email}"/>
-            <td th:text="${user.roles}"/>
-            <td th:text="${user.getLastMessage()}"/>
-
-            <td>
-                <div>
-                    <!-- Add "update" button/link -->
-                    <a class="accent username-submit inline"
-                       style="margin-right: 5px;" th:href="@{'/users/showFormForUpdate/'+${user.id}}">
-                        Update
-                    </a>
-                    <!-- Add "delete" button/link -->
-                    <a class="accent username-submit inline"
-                       onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false"
-                       th:href="@{'/users/delete/'+${user.id}}">
-                        Delete
-                    </a>
-                </div>
-
-            </td>
+                </td>
 
 
-        </tr>
-        </tbody>
-    </table>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div>
 </body>

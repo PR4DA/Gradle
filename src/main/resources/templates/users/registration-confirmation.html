@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns:sec="hrrp://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, shrink-to-fit=no"
           name="viewport">
@@ -27,6 +27,21 @@
 </noscript>
 
 <div class="user-login-page">
+    <div class="right">
+        <!-- Add a redirect button -->
+        <div sec:authorize="hasRole('ROLE_ADMIN')" style="display: block;">
+            <a th:href="@{/users/list}">
+                <button class="accent username-submit white-btn" style="width: 110px; margin-bottom: 8px;">Users
+                </button>
+            </a>
+        </div>
+        <!-- Add a logout button -->
+        <div sec:authorize="isAuthenticated()" style="display: block;">
+            <form id="logoutForm" method="POST" name="logoutForm" th:action="@{/logout}">
+                <button class="accent username-submit white-btn" style="width: 110px;" type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
     <div class="username-page-container">
         <h2>User registered successfully!</h2>
 

@@ -25,6 +25,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    text-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15) !important;
 }
 
 body:before {
@@ -62,19 +63,23 @@ body:before {
 input {
     padding-left: 10px;
     outline: none;
+    text-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
 }
 
 h1, h2, h3, h4, h5, h6 {
     margin-top: 20px;
     margin-bottom: 20px;
+    text-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
 }
 
 h1 {
     font-size: 1.7em;
+    text-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
 }
 
 a {
     color: chocolate;
+    text-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
 }
 
 button {
@@ -96,24 +101,24 @@ button {
 button.default {
     background-color: #e8e8e8;
     color: #333;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
 }
 
 button.primary {
     background-color: chocolate;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
     color: #fff;
 }
 
 button.accent {
     background-color: coral;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
     color: #fff;
 }
 
 a.accent {
     background-color: coral;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
     color: #fff;
     border: 1px solid transparent;
     font-size: 14px;
@@ -182,9 +187,8 @@ button.accent:hover {
     margin-right: auto;
     background-color: #fff;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
-    margin-top: 30px;
-    height: calc(100% - 60px);
-    max-height: 600px;
+    margin-top: 40px;
+    height: calc(100% - 200px);
     position: relative;
 }
 
@@ -353,6 +357,7 @@ button.accent:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
 }
 
 .right {
@@ -373,6 +378,10 @@ button.accent:hover {
     padding: 15px 5px !important;
 }
 
+table {
+    background-color: rgba(255, 127, 80, 0.45);
+}
+
 a.link {
     color: coral;
 }
@@ -384,13 +393,13 @@ a.link:hover {
 .white-btn {
     margin-right: 20px;
     background-color: white !important;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
     color: coral !important;
 }
 
 .white-btn:hover {
     background-color: white !important;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
     color: #fd7c4c !important;
 }
 
@@ -402,5 +411,26 @@ a.link:hover {
 .inner {
     display: inline-block !important;
 }
+
+.shadow {
+    text-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+}
+
+tbody {
+    display: block;
+    height: 550px;
+    overflow: auto;
+}
+
+thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+thead {
+    width: calc(100% - 1em);
+}
+
 
 

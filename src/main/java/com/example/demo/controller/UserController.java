@@ -2,9 +2,15 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
+import com.example.demo.service.FileExporter;
 import com.example.demo.service.UserService;
 import com.example.demo.user.CrmUser;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +18,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.ws.rs.Consumes;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -21,9 +31,11 @@ public class UserController {
 
     private UserService userService;
     private Logger logger = Logger.getLogger(getClass().getName());
+    private FileExporter fileExporter;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, FileExporter fileExporter) {
         this.userService = userService;
+        this.fileExporter = fileExporter;
     }
 
     @InitBinder
@@ -72,6 +84,47 @@ public class UserController {
 
         // send over to our form
         return "users/update-form";
+    }
+
+//    @GetMapping("/download/{id}")
+//    @ResponseBody
+//    public FileSystemResource downloadFile(@PathVariable("id") Long id) {
+//        User user = userService.findById(id);
+//        return new FileSystemResource(new File(user.getFileUrl()));
+//    }
+//@RequestMapping("/download/{id}")
+//public ResponseEntity<InputStreamResource> downloadTextFileExample1() throws FileNotFoundException {
+//    String fileName = "example1.txt";
+//    String fileContent = "Simple Solution \nDownload Example 1";
+//
+//    // Create text file
+//    Path exportedPath = fileExporter.export(fileContent, fileName);
+//
+//    // Download file with InputStreamResource
+//    File exportedFile = exportedPath.toFile();
+//    FileInputStream fileInputStream = new FileInputStream(exportedFile);
+//    InputStreamResource inputStreamResource = new InputStreamResource(fileInputStream);
+//
+//    return ResponseEntity.ok()
+//            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + fileName)
+//            .contentType(MediaType.TEXT_PLAIN)
+//            .contentLength(exportedFile.length())
+//            .body(inputStreamResource);
+//}
+
+    @RequestMapping(path = "/download/{id}", method = RequestMethod.GET)
+    @Consumes(MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Resource> downloadDocument(@PathVariable("id") Long id, String acquistionId, String fileType, Integer expressVfId) throws IOException {
+        User user = userService.findById(id);
+        File file = new File(user.getFileUrl());
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+        System.out.println("The length of the file is : " + file.length());
+
+        return ResponseEntity.ok().headers(headers).contentLength(file.length()).contentType(MediaType.APPLICATION_OCTET_STREAM).body(resource);
     }
 
     @PostMapping("/processRegistrationForm")

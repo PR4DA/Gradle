@@ -1,7 +1,13 @@
 package com.example.demo.entity;
 
 import javax.persistence.*;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -86,17 +92,6 @@ public class User implements Serializable {
 
     }
 
-    public String getLastMessage() {
-        try {
-            int lastIdx = messages.size() - 1;
-            ChatMessage lastElement = messages.get(lastIdx);
-            return lastElement.toString();
-        } catch (Exception e) {
-            return "No messages yet";
-        }
-
-    }
-
     public Long getId() {
         return id;
     }
@@ -161,8 +156,86 @@ public class User implements Serializable {
         this.messages = messages;
     }
 
+    public String getLastMessage() {
+        try {
+            int lastIdx = messages.size() - 1;
+            ChatMessage lastElement = messages.get(lastIdx);
+            return "Last msg : <" + lastElement.toString() + ">";
+        } catch (Exception e) {
+            return "No messages yet";
+        }
+    }
+
+    public String getFirstMessage() {
+        try {
+            ChatMessage firstElement = messages.get(0);
+            return "First msg : <" + firstElement.toString() + ">";
+        } catch (Exception e) {
+            return "No messages yet";
+        }
+    }
+
+    public String getReport() {
+        return "some shit";
+    }
+
+    public File createFile() {
+        try {
+            File myObj = new File("src/main/resources/static/files", this.userName + ".txt");
+            if (myObj.createNewFile()) {
+                return myObj;
+            } else {
+                return null;
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public File writeFile(File file) throws IOException {
+        Files.writeString(Path.of(file.getAbsolutePath()), getReport());
+        return file;
+    }
+
+    void deleteFile(String path) {
+        try {
+            Files.delete(Path.of(path));
+        } catch (NoSuchFileException x) {
+            System.err.format("%s: no such" + " file or directory%n", path);
+        } catch (DirectoryNotEmptyException x) {
+            System.err.format("%s not empty%n", path);
+        } catch (IOException x) {
+            // File permission problems are caught here.
+            System.err.println(x);
+        }
+    }
+
+    public String getFileUrl() {
+        try {
+            deleteFile("src/main/resources/static/files/" + this.userName + ".txt");
+        } catch (Exception e) {
+        } finally {
+            File file = createFile();
+            if (file != null) {
+                try {
+                    writeFile(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    return file.getAbsolutePath();
+                }
+            }
+            return file.getAbsolutePath();
+        }
+    }
+
+
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", username='" + userName + '\'' + ", password='" + password + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", email='" + email + '\'' + ", roles=" + roles + ", messages=" + messages + '}';
     }
+
+
 }
