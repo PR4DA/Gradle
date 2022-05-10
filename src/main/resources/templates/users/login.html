@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, shrink-to-fit=no"
+          name="viewport">
+    <title>Chat Rom | Spring Boot + WebSocket</title>
+    <link href="/css/main.css" rel="stylesheet"/>
+    <!-- Reference Bootstrap files -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body background="coral;"
+      style="background-position: center; background-repeat: no-repeat; background-size: cover;">
+<noscript>
+    <h2>Messaging</h2>
+</noscript>
+
+<div class="user-login-page">
+    <div class="username-page-container">
+        <h1 class="title">Login with a user </h1>
+        <form method="POST" name="usernameForm"
+              th:action="@{/authenticateTheUser}">
+            <!-- Place for messages: error, alert etc ... -->
+            <div class="form-group">
+                <div class="col-xs-15">
+                    <div>
+
+                        <!-- Check for login error -->
+                        <div class="alert alert-danger col-xs-offset-1 col-xs-10" th:if="${param.error}">
+                            Invalid username and password.
+                        </div>
+
+                        <!-- Check for logout -->
+                        <div class="alert alert-success col-xs-offset-1 col-xs-10" th:if="${param.logout}">
+                            You have been logged out.
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- User name -->
+            <div class="form-group input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input class="form-control" name="username" placeholder="username" type="text"/>
+            </div>
+            <!-- Password -->
+            <div class="form-group input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input class="form-control" name="password" placeholder="password" type="password"/>
+            </div>
+            <!-- Login/Submit Button -->
+            <div class="form-group">
+                <button class="accent username-submit" type="submit">Login</button>
+                <a aria-pressed="true" class="accent username-submit" role="button"
+                   th:href="@{/register/showRegistrationForm}">Register</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="hrrp://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, shrink-to-fit=no"
+          name="viewport">
+    <title>New User Registration</title>
+    <link href="/css/main.css" rel="stylesheet"/>
+    <!-- Reference Bootstrap files -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+    <style>
+        .error {
+            color: red
+        }
+    </style>
+</head>
+<body background="coral;"
+      style="background-position: center; background-repeat: no-repeat; background-size: cover;">
+<noscript>
+    <h2>Access Denied</h2>
+</noscript>
+
+<div class="user-login-page">
+    <div class="right">
+        <!-- Add a redirect button -->
+        <div sec:authorize="hasRole('ROLE_ADMIN')" style="display: inline-block;">
+            <a th:href="@{/users/list}">
+                <button class="accent username-submit white-btn" style="width: 110px; margin-bottom: 8px;">Users
+                </button>
+            </a>
+        </div>
+        <div sec:authorize="isAuthenticated()" style="display: inline-block;">
+            <!-- Add a logout button -->
+            <form id="logoutForm" method="POST" name="logoutForm" th:action="@{/logout}">
+                <button class="accent username-submit white-btn" style="width: 110px;" type="submit">Logout</button>
+            </form>
+            <div>
+            </div>
+            <div class="username-page-container">
+                <h2>Access Denied</h2>
+
+                <hr>
+
+                <a th:href="@{/showMyLoginPage}">Wait till ADMIN confirm you</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, shrink-to-fit=no"
+          name="viewport">
+    <title>ADMIN home page</title>
+    <link href="/css/main.css" rel="stylesheet"/>
+    <!-- Reference Bootstrap files -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/main.js"></script>
+    <style>
+        .error {
+            color: red
+        }
+    </style>
+</head>
+<body>
+<div class="users-container">
+    <!-- display user name and role -->
+    <div>
+        <h3>Users management page</h3>
+        <hr>
+        User: <span sec:authentication="name"></span> Role(s): <span sec:authentication="principal.authorities"></span>
+
+
+        <div class="right outer">
+            <a class="inner" th:href="@{/}">
+                <button class="accent username-submit inner" style="width: 110px;">Chat</button>
+            </a>
+            <!-- Add a logout button -->
+            <form class="inner" id="logoutForm" method="POST" name="logoutForm" th:action="@{/logout}">
+                <button class="accent username-submit inner" style="width: 110px;" type="submit">Logout</button>
+            </form>
+        </div>
+        <br>
+
+        <!-- Check for login error -->
+        <div th:if="${session.user}">
+            <p th:text="'First name: ' + ${session.user.firstName} + ', Last name: ' + ${session.user.lastName} + ', Email: ' + ${session.user.email}"></p>
+        </div>
+    </div>
+    <hr>
+    <!-- Add a button -->
+    <div class="inline">
+        <a class="link" th:href="@{/register/showRegistrationForm}">Add User</a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Role(-s)</th>
+            <th>Last message</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="user : ${users}">
+
+            <td th:text="${user.userName}"/>
+            <td th:text="${user.firstName}"/>
+            <td th:text="${user.lastName}"/>
+            <td th:text="${user.email}"/>
+            <td th:text="${user.roles}"/>
+            <td th:text="${user.getLastMessage()}"/>
+
+            <td>
+                <div>
+                    <!-- Add "update" button/link -->
+                    <a class="accent username-submit inline"
+                       style="margin-right: 5px;" th:href="@{'/users/showFormForUpdate/'+${user.id}}">
+                        Update
+                    </a>
+                    <!-- Add "delete" button/link -->
+                    <a class="accent username-submit inline"
+                       onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false"
+                       th:href="@{'/users/delete/'+${user.id}}">
+                        Delete
+                    </a>
+                </div>
+
+            </td>
+
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
+
+
+
