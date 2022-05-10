@@ -66,30 +66,29 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void update(User user) {
-        User newUser = new User();
-        newUser.setId(user.getId());
-        if (!user.getUserName().isEmpty()) {
-            newUser.setUserName(user.getUserName());
-            List<ChatMessage> messages = newUser.getMessages();
+    public void update(User temp) {
+        User user = userDao.getById(temp.getId());
+        if (!temp.getUserName().isEmpty()) {
+            user.setUserName(temp.getUserName());
+            List<ChatMessage> messages = user.getMessages();
             for (ChatMessage message : messages) {
-                message.setSender(newUser.getUserName());
+                message.setSender(temp.getUserName());
             }
         }
-        if (!user.getPassword().isEmpty()) {
-            newUser.setPassword(user.getPassword());
+        if (!temp.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(temp.getPassword()));
         }
-        if (!user.getFirstName().isEmpty()) {
-            newUser.setFirstName(user.getFirstName());
+        if (!temp.getFirstName().isEmpty()) {
+            user.setFirstName(temp.getFirstName());
         }
-        if (!user.getLastName().isEmpty()) {
-            newUser.setLastName(user.getLastName());
+        if (!temp.getLastName().isEmpty()) {
+            user.setLastName(temp.getLastName());
         }
-        if (!user.getEmail().isEmpty()) {
-            newUser.setEmail(user.getEmail());
+        if (!temp.getEmail().isEmpty()) {
+            user.setEmail(temp.getEmail());
         }
-        if (user.getRoles().size() >= 1) {
-            newUser.setRoles(user.getRoles());
+        if (temp.getRoles().size() >= 1) {
+            user.setRoles(user.getRoles());
         }
         userDao.save(user);
     }

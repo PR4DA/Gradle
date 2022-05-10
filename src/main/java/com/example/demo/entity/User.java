@@ -68,6 +68,7 @@ public class User implements Serializable {
         this.messages = messages;
     }
 
+
     public void addRole(Role role) {
         try {
             this.roles.add(role);
