@@ -19,8 +19,8 @@ import java.util.logging.Logger;
 public class RegistrationController {
 
     @Autowired
-    private UserService userService;
-    private Logger logger = Logger.getLogger(getClass().getName());
+    private final UserService userService;
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     public RegistrationController(UserService userService) {
         this.userService = userService;
@@ -61,10 +61,8 @@ public class RegistrationController {
 
     @PostMapping("/processRegistrationForm")
     public String processRegistrationForm(@Valid @ModelAttribute("crmUser") CrmUser theCrmUser, BindingResult theBindingResult, Model theModel) {
-
         String userName = theCrmUser.getUserName();
         logger.info("Processing registration form for: " + userName);
-
         // form validation
         if (theBindingResult.hasErrors()) {
             return "users/register";
@@ -78,12 +76,9 @@ public class RegistrationController {
             logger.warning("User name already exists.");
             return "users/register";
         }
-
         // create user account        						
         userService.save(theCrmUser);
-
         logger.info("Successfully created user: " + userName);
-
         return "users/registration-confirmation";
     }
 }

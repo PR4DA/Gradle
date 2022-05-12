@@ -28,7 +28,7 @@
 
 <div class="user-login-page">
     <div class="username-page-container">
-        <h1 class="title">Registration a new User</h1>
+        <h1 class="title">Update Info of <span th:text="${user.userName}"></span></h1>
         <!-- Update Form -->
         <form class="form-horizontal"
               method="POST" th:action="@{/register/update}"
@@ -52,10 +52,10 @@
 
 
             <!-- Password -->
-            <div class="form-group input-group">
+            <div class="hidden form-group input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                 <input class="form-control" placeholder="password (*)" th:errorclass="fieldError" th:field="*{password}"
-                       type="password"/>
+                       th:value="passholdertemp" type="password"/>
             </div>
             <div class="text-danger"
                  style="margin-bottom: 25px" th:if="${#fields.hasErrors('password')}">

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
+<html lang="eu" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, shrink-to-fit=no"
           name="viewport">
@@ -49,7 +50,7 @@
         <a class="link" th:href="@{/register/showRegistrationForm}">Add User</a>
     </div>
 
-    <div style="padding: 8px;">
+    <div>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -70,12 +71,17 @@
                 <td th:text="${user.lastName}"/>
                 <td th:text="${user.email}"/>
                 <td th:text="${user.roles}"/>
-                <td th:text="${user.getMessages().size()}"/>
-                <!--            <td style="text-align: center">-->
-                <!--                <a th:href="@{'/users/download/'+${user.id}}">-->
-                <!--                    <span class="glyphicon glyphicon-save shadow" style="color: olive; font-size: 27px;"></span>-->
-                <!--                </a>-->
-                <!--            </td>-->
+                <td>
+                    <ul style="display:inline-block; text-align: center" th:if="${user.getMessages().size() == 0}">
+                        <span>No messages</span>
+                    </ul>
+                    <ul style="display:inline-block; text-align: center" th:unless="${user.getMessages().size() == 0}">
+                        <a th:href="@{'/users/download/'+${user.id}}">
+                            <span class="glyphicon glyphicon-save shadow"
+                                  style="color: #43464b; font-size: 27px;"></span>
+                        </a>
+                    </ul>
+                </td>
                 <td>
                     <div style="text-align: center">
                         <!-- Add "update" button/link -->

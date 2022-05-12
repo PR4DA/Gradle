@@ -75,9 +75,6 @@ public class UserServiceImpl implements UserService {
                 message.setSender(temp.getUserName());
             }
         }
-        if (!temp.getPassword().isEmpty()) {
-            user.setPassword(passwordEncoder.encode(temp.getPassword()));
-        }
         if (!temp.getFirstName().isEmpty()) {
             user.setFirstName(temp.getFirstName());
         }

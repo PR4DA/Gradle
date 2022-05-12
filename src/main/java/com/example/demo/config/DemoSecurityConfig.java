@@ -44,9 +44,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.authorizeRequests().antMatchers("/").hasAnyRole("USER", "ADMIN").antMatchers("/users/*").hasRole("ADMIN").antMatchers("/users/**").hasRole("ADMIN").antMatchers("/users/").hasRole("ADMIN").and().formLogin().loginPage("/showMyLoginPage").loginProcessingUrl("/authenticateTheUser").successHandler(customAuthenticationSuccessHandler).permitAll().and().logout().permitAll().and().exceptionHandling().accessDeniedPage("/access-denied");
-
     }
 
     //beans

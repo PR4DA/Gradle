@@ -74,7 +74,7 @@ public class ChatMessage {
 
     @Override
     public String toString() {
-        return "content: " + content + '\'' + ", timestamp: " + timestamp + '}';
+        return "Type :" + type + "\nMessage content: " + content + "\nTime: " + timestamp + "\n\n";
     }
 
     public enum MessageType {

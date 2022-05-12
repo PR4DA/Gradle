@@ -160,7 +160,7 @@ public class User implements Serializable {
         try {
             int lastIdx = messages.size() - 1;
             ChatMessage lastElement = messages.get(lastIdx);
-            return "Last msg : <" + lastElement.toString() + ">";
+            return lastElement.toString();
         } catch (Exception e) {
             return "No messages yet";
         }
@@ -169,14 +169,39 @@ public class User implements Serializable {
     public String getFirstMessage() {
         try {
             ChatMessage firstElement = messages.get(0);
-            return "First msg : <" + firstElement.toString() + ">";
+            return firstElement.toString();
         } catch (Exception e) {
             return "No messages yet";
         }
     }
 
+    public int getNormalMessageLength() {
+        int aetmltg = 0;
+        for (ChatMessage mssg : this.messages) {
+            aetmltg += mssg.getContent().length();
+        }
+        return (int) aetmltg / this.messages.size();
+    }
+
     public String getReport() {
-        return "some shit";
+        String report = "" + this.toString() + "\n\n";
+        report += "__________________________________________________________________________\n";
+        if (messages.size() >= 1) {
+            report += "First message: \n" + getFirstMessage() + "\n\n";
+            report += "Last message: \n" + getLastMessage() + "\n\n";
+            report += "De medium message length: \n" + getNormalMessageLength() + "\n\n";
+            report += "Count of messages sent: \n" + messages.size() + "\n\n";
+
+            report += "__________________________________________________________________________\n";
+            for (ChatMessage mssg : messages) {
+                report += mssg.toString();
+            }
+            report += "__________________________________________________________________________\n";
+        } else {
+            report += "Messages doest exist";
+            report += "__________________________________________________________________________\n";
+        }
+        return report;
     }
 
     public File createFile() {
@@ -216,25 +241,26 @@ public class User implements Serializable {
         try {
             deleteFile("src/main/resources/static/files/" + this.userName + ".txt");
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             File file = createFile();
             if (file != null) {
                 try {
-                    writeFile(file);
+                    file = writeFile(file);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
                     return file.getAbsolutePath();
                 }
             }
-            return file.getAbsolutePath();
+            return "file.getAbsolutePath()";
         }
     }
 
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", username='" + userName + '\'' + ", password='" + password + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", email='" + email + '\'' + ", roles=" + roles + ", messages=" + messages + '}';
+        return "u: " + userName + "- messages sent list \n\nid: " + id + "\troles: " + roles + "\n" + "Name: " + firstName + " \n" + "Surname: " + lastName + "\n" + "Email: " + email;
     }
 
 

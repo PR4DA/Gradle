@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ChatController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public ChatController(UserService userService) {
         this.userService = userService;
@@ -20,7 +20,6 @@ public class ChatController {
 
     @GetMapping("/")
     public String showHome() {
-
         return "../static/index";
     }
 

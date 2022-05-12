@@ -27,7 +27,7 @@
 </noscript>
 
 <div class="user-login-page">
-    <div class="right">
+    <div class="right" style="margin-top: 30px;">
         <!-- Add a redirect button -->
         <div sec:authorize="hasRole('ROLE_ADMIN')" style="display: block;">
             <a th:href="@{/users/list}">
