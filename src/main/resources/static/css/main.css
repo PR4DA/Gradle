@@ -29,7 +29,7 @@ body {
 }
 
 body:before {
-    background: coral;
+    background: #497DA2;
     content: "";
     height: 50%;
     left: 0;
@@ -78,7 +78,7 @@ h1 {
 }
 
 a {
-    color: chocolate;
+    color: #497DA2;
     text-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
 }
 
@@ -105,19 +105,19 @@ button.default {
 }
 
 button.primary {
-    background-color: chocolate;
+    background-color: #497DA2;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
     color: #fff;
 }
 
 button.accent {
-    background-color: coral;
+    background-color: #497DA2;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
     color: #fff;
 }
 
 a.accent {
-    background-color: coral;
+    background-color: #497DA2;
     border: 1px solid transparent;
     border-radius: 2px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
@@ -135,13 +135,13 @@ a.accent {
 }
 
 a.accent:hover {
-    background-color: #fd7c4c;
+    background-color: #497DA2;
     color: white;
     text-decoration: none;
 }
 
 button.accent:hover {
-    background-color: #fd7c4c;
+    background-color: #497DA2;
 }
 
 
@@ -380,24 +380,24 @@ button.accent:hover {
 }
 
 a.link {
-    color: coral;
+    color: #497DA2;
 }
 
 a.link:hover {
-    color: #fd7c4c;
+    color: #497DA2;
 }
 
 .white-btn {
     background-color: white !important;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
-    color: coral !important;
+    color: #497DA2 !important;
     margin-right: 20px;
 }
 
 .white-btn:hover {
     background-color: white !important;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
-    color: #fd7c4c !important;
+    color: #497DA2 !important;
 }
 
 .outer {

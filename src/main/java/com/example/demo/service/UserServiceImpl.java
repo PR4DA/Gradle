@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
         if (!temp.getEmail().isEmpty()) {
             user.setEmail(temp.getEmail());
         }
-        if (temp.getRoles().isEmpty()) {
+        if (!temp.getRoles().isEmpty()) {
             user.setRoles(temp.getRoles());
         }
         userDao.save(user);
