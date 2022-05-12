@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
-import com.example.demo.service.FileExporter;
 import com.example.demo.service.UserService;
 import com.example.demo.user.CrmUser;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -25,11 +24,9 @@ public class UserController {
 
     private final UserService userService;
     private final Logger logger = Logger.getLogger(getClass().getName());
-    private final FileExporter fileExporter;
 
-    public UserController(UserService userService, FileExporter fileExporter) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.fileExporter = fileExporter;
     }
 
     @InitBinder

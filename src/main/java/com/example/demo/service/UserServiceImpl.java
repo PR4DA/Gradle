@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,41 +54,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public User findById(Long theId) {
+        Optional<User> user = userDao.findById(theId);
+        if (user.isPresent()) {
+            return user.get();
+        }
+        return null;
+    }
+
+    @Override
+    @Transactional
     public User findByUserName(String userName) {
         // check the database if the user already exists
         return userDao.findByUserName(userName);
-    }
-
-    @Override
-    @Transactional
-    public User findById(Long theId) {
-        return userDao.findById(theId).get();
-    }
-
-    @Override
-    @Transactional
-    public void update(User temp) {
-        User user = userDao.getById(temp.getId());
-        if (!temp.getUserName().isEmpty()) {
-            user.setUserName(temp.getUserName());
-            List<ChatMessage> messages = user.getMessages();
-            for (ChatMessage message : messages) {
-                message.setSender(temp.getUserName());
-            }
-        }
-        if (!temp.getFirstName().isEmpty()) {
-            user.setFirstName(temp.getFirstName());
-        }
-        if (!temp.getLastName().isEmpty()) {
-            user.setLastName(temp.getLastName());
-        }
-        if (!temp.getEmail().isEmpty()) {
-            user.setEmail(temp.getEmail());
-        }
-        if (temp.getRoles().size() != 0) {
-            user.setRoles(temp.getRoles());
-        }
-        userDao.save(user);
     }
 
     @Override
@@ -110,10 +89,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void saveUserMessage(String sender, ChatMessage chatMessage) {
-        User user = userDao.findByUserName(sender);
-        user.addMessage(chatMessage);
-        // save user in the database
+    public void update(User temp) {
+        User user = userDao.getById(temp.getId());
+        if (!temp.getUserName().isEmpty()) {
+            user.setUserName(temp.getUserName());
+            List<ChatMessage> messages = user.getMessages();
+            for (ChatMessage message : messages) {
+                message.setSender(temp.getUserName());
+            }
+        }
+        if (!temp.getFirstName().isEmpty()) {
+            user.setFirstName(temp.getFirstName());
+        }
+        if (!temp.getLastName().isEmpty()) {
+            user.setLastName(temp.getLastName());
+        }
+        if (!temp.getEmail().isEmpty()) {
+            user.setEmail(temp.getEmail());
+        }
+        if (temp.getRoles().isEmpty()) {
+            user.setRoles(temp.getRoles());
+        }
         userDao.save(user);
     }
 
@@ -139,8 +135,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<ChatMessage> listMessages() {
-//        return messageDao.findAllAndOrderByTimestampAsc();
         return messageDao.findAll();
+    }
+
+    @Override
+    @Transactional
+    public void saveUserMessage(String sender, ChatMessage chatMessage) {
+        User user = userDao.findByUserName(sender);
+        user.addMessage(chatMessage);
+        // save user in the database
+        userDao.save(user);
     }
 
     @Override

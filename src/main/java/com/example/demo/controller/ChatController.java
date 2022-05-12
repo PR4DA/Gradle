@@ -26,7 +26,11 @@ public class ChatController {
     @MessageMapping("/chat.register")
     @SendTo("/topic/public")
     public ChatMessage register(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
-        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        try {
+            headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return chatMessage;
     }
 

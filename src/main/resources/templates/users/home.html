@@ -26,8 +26,6 @@
         <h3>Users management page</h3>
         <hr>
         User: <span sec:authentication="name"></span> Role(s): <span sec:authentication="principal.authorities"></span>
-
-
         <div class="right outer">
             <a class="inner" th:href="@{/}">
                 <button class="accent username-submit inner" style="width: 110px;">Chat</button>
@@ -38,7 +36,6 @@
             </form>
         </div>
         <br>
-
         <!-- Check for login error -->
         <div th:if="${session.user}">
             <p th:text="'First name: ' + ${session.user.firstName} + ', Last name: ' + ${session.user.lastName} + ', Email: ' + ${session.user.email}"></p>
@@ -49,63 +46,59 @@
     <div class="inline">
         <a class="link" th:href="@{/register/showRegistrationForm}">Add User</a>
     </div>
-
-    <div>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>Username</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Role(-s)</th>
-                <th>Messages</th>
-                <th style="text-align: center">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user : ${users}">
-
-                <td th:text="${user.userName}"/>
-                <td th:text="${user.firstName}"/>
-                <td th:text="${user.lastName}"/>
-                <td th:text="${user.email}"/>
-                <td th:text="${user.roles}"/>
-                <td>
-                    <ul style="display:inline-block; text-align: center" th:if="${user.getMessages().size() == 0}">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Role(-s)</th>
+            <th>Messages</th>
+            <th style="text-align: center">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.userName}"/>
+            <td th:text="${user.firstName}"/>
+            <td th:text="${user.lastName}"/>
+            <td th:text="${user.email}"/>
+            <td th:text="${user.roles}"/>
+            <td>
+                    <span th:if="${user.getMessages().size() == 0}">
                         <span>No messages</span>
-                    </ul>
-                    <ul style="display:inline-block; text-align: center" th:unless="${user.getMessages().size() == 0}">
+                    </span>
+                <span th:unless="${user.getMessages().size() == 0}">
                         <a th:href="@{'/users/download/'+${user.id}}">
-                            <span class="glyphicon glyphicon-save shadow"
+                            <span class="glyphicon glyphicon-cloud-download shadow" data-placement="top"
+                                  data-toggle="tooltip" title="download messages report"
                                   style="color: #43464b; font-size: 27px;"></span>
                         </a>
-                    </ul>
-                </td>
-                <td>
-                    <div style="text-align: center">
-                        <!-- Add "update" button/link -->
-                        <a class="inline" th:href="@{'/users/showFormForUpdate/'+${user.id}}">
-                        <span class="glyphicon glyphicon-pencil shadow"
+                    </span>
+            </td>
+            <td>
+                <div style="text-align: center">
+                    <!-- Add "update" button/link -->
+                    <a class="inline" th:href="@{'/users/showFormForUpdate/'+${user.id}}">
+                        <span class="glyphicon glyphicon-pencil shadow" data-placement="top" data-toggle="tooltip"
+                              title="edit"
                               style="color: #ff7f50; font-size: 27px; margin-right: 20px;"></span>
-                        </a>
-                        <!-- Add "delete" button/link -->
-                        <a class="inline"
-                           onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false"
-                           th:href="@{'/users/delete/'+${user.id}}">
-                            <span class="glyphicon glyphicon-trash shadow"
+                    </a>
+                    <!-- Add "delete" button/link -->
+                    <a class="inline"
+                       onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false"
+                       th:href="@{'/users/delete/'+${user.id}}">
+                            <span class="glyphicon glyphicon-trash shadow" data-placement="top" data-toggle="tooltip"
+                                  title="delete"
                                   style="color: coral; font-size: 27px;"></span>
-                        </a>
-                    </div>
+                    </a>
+                </div>
 
-                </td>
-
-
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

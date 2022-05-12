@@ -1,6 +1,6 @@
 * {
-    -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -10,39 +10,39 @@ html, body {
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-weight: 400;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1rem;
-    line-height: 1.58;
-    color: #333;
-    /*  background-color: #f4f4f4; */
-    height: 100%;
-    position: relative;
-
-    /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    color: #333;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    /*  background-color: #f4f4f4; */
+    height: 100%;
+    line-height: 1.58;
+
+    /* Center and scale the image nicely */
+    margin: 0;
+    padding: 0;
+    position: relative;
     text-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15) !important;
 }
 
 body:before {
-    height: 50%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
     background: coral;
     content: "";
+    height: 50%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
     z-index: -1;
 }
 
 .clearfix:after {
-    display: block;
-    content: "";
     clear: both;
+    content: "";
+    display: block;
 }
 
 .hidden {
@@ -50,10 +50,10 @@ body:before {
 }
 
 .form-control {
-    width: 100%;
-    min-height: 38px;
-    font-size: 15px;
     border: 1px solid #c8c8c8;
+    font-size: 15px;
+    min-height: 38px;
+    width: 100%;
 }
 
 .form-group {
@@ -61,14 +61,14 @@ body:before {
 }
 
 input {
-    padding-left: 10px;
     outline: none;
+    padding-left: 10px;
     text-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin-top: 20px;
     margin-bottom: 20px;
+    margin-top: 20px;
     text-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
 }
 
@@ -83,25 +83,25 @@ a {
 }
 
 button {
-    box-shadow: none;
     border: 1px solid transparent;
-    font-size: 14px;
-    outline: none;
-    line-height: 100%;
-    white-space: nowrap;
-    vertical-align: middle;
-    padding: 0.6rem 1rem;
     border-radius: 2px;
-    transition: all 0.2s ease-in-out;
+    box-shadow: none;
     cursor: pointer;
+    font-size: 14px;
+    line-height: 100%;
     min-height: 38px;
+    outline: none;
+    padding: 0.6rem 1rem;
+    transition: all 0.2s ease-in-out;
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
 
 button.default {
     background-color: #e8e8e8;
-    color: #333;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
+    color: #333;
 }
 
 button.primary {
@@ -118,26 +118,26 @@ button.accent {
 
 a.accent {
     background-color: coral;
+    border: 1px solid transparent;
+    border-radius: 2px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
     color: #fff;
-    border: 1px solid transparent;
-    font-size: 14px;
-    outline: none;
-    line-height: 100%;
-    white-space: nowrap;
-    vertical-align: middle;
-    padding: 1rem 1rem;
-    border-radius: 2px;
-    transition: all 0.2s ease-in-out;
     cursor: pointer;
-    min-height: 38px;
+    font-size: 14px;
+    line-height: 100%;
     margin-top: 10px;
+    min-height: 38px;
+    outline: none;
+    padding: 1rem 1rem;
+    transition: all 0.2s ease-in-out;
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
 a.accent:hover {
+    background-color: #fd7c4c;
     color: white;
     text-decoration: none;
-    background-color: #fd7c4c;
 }
 
 button.accent:hover {
@@ -155,20 +155,20 @@ button.accent:hover {
 
 .username-page-container {
     background: #fff;
-    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     border-radius: 2px;
-    width: 100%;
-    max-width: 500px;
+    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     display: inline-block;
-    vertical-align: middle;
-    padding: 35px 55px 35px;
-    min-height: 250px;
-    position: absolute;
-    top: 50%;
     left: 0;
-    right: 0;
     margin: 0 auto;
     margin-top: -160px;
+    max-width: 500px;
+    min-height: 250px;
+    padding: 35px 55px 35px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    vertical-align: middle;
+    width: 100%;
 }
 
 /*.username-page-container .username-submit {*/
@@ -177,29 +177,29 @@ button.accent:hover {
 
 
 #chat-page {
-    position: relative;
     height: 100%;
+    position: relative;
 }
 
 .chat-container {
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
     background-color: #fff;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
-    margin-top: 40px;
     height: calc(100% - 200px);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    max-width: 700px;
     position: relative;
 }
 
 #chat-page ul {
-    list-style-type: none;
     background-color: #FFF;
+    height: calc(100% - 150px);
+    list-style-type: none;
     margin: 0;
     overflow: auto;
     overflow-y: scroll;
     padding: 0 20px;
-    height: calc(100% - 150px);
 }
 
 #chat-page #messageForm {
@@ -207,10 +207,10 @@ button.accent:hover {
 }
 
 #chat-page ul li {
-    line-height: 1.5rem;
-    padding: 10px 20px;
-    margin: 0;
     border-bottom: 1px solid #f4f4f4;
+    line-height: 1.5rem;
+    margin: 0;
+    padding: 10px 20px;
 }
 
 #chat-page ul li p {
@@ -218,9 +218,9 @@ button.accent:hover {
 }
 
 #chat-page .event-message {
-    width: 100%;
-    text-align: center;
     clear: both;
+    text-align: center;
+    width: 100%;
 }
 
 #chat-page .event-message p {
@@ -235,20 +235,20 @@ button.accent:hover {
 }
 
 #chat-page .chat-message i {
-    position: absolute;
-    width: 42px;
-    height: 42px;
-    overflow: hidden;
-    left: 10px;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 18px;
-    line-height: 42px;
-    color: #fff;
-    text-align: center;
     border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    font-size: 18px;
     font-style: normal;
+    height: 42px;
+    left: 10px;
+    line-height: 42px;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
     text-transform: uppercase;
+    vertical-align: middle;
+    width: 42px;
 }
 
 #chat-page .chat-message span {
@@ -267,27 +267,27 @@ button.accent:hover {
 
 #messageForm .input-group button {
     float: left;
-    width: 80px;
     height: 38px;
     margin-left: 5px;
+    width: 80px;
 }
 
 .chat-header {
-    text-align: center;
-    padding: 15px;
     border-bottom: 1px solid #ececec;
+    padding: 15px;
+    text-align: center;
 }
 
 .chat-header h2 {
-    margin: 0;
     font-weight: 500;
+    margin: 0;
 }
 
 .connecting {
-    padding-top: 5px;
-    text-align: center;
     color: #777;
+    padding-top: 5px;
     position: absolute;
+    text-align: center;
     top: 65px;
     width: 100%;
 }
@@ -308,10 +308,10 @@ button.accent:hover {
     }
 
     .username-page-container {
-        width: auto;
         margin-left: 15px;
         margin-right: 15px;
         padding: 25px;
+        width: auto;
     }
 
     #chat-page ul {
@@ -349,15 +349,15 @@ button.accent:hover {
 }
 
 .users-container {
-    width: 80%;
     background-color: #fff;
-    padding: 1% 2%;
+    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     height: 95%;
+    left: 50%;
+    padding: 1% 2%;
     position: fixed;
     top: 50%;
-    left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+    width: 80%;
 }
 
 .right {
@@ -370,16 +370,13 @@ button.accent:hover {
     float: left;
 }
 
-.table th {
-    padding: 15px 5px !important;
-}
-
 .table td {
-    padding: 15px 5px !important;
+    padding-top: 15px !important;
+    text-align: inherit;
 }
 
-table {
-    background-color: rgba(255, 127, 80, 0.45);
+.table th {
+    padding-top: 50px !important;
 }
 
 a.link {
@@ -391,10 +388,10 @@ a.link:hover {
 }
 
 .white-btn {
-    margin-right: 20px;
     background-color: white !important;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
     color: coral !important;
+    margin-right: 20px;
 }
 
 .white-btn:hover {
@@ -404,8 +401,8 @@ a.link:hover {
 }
 
 .outer {
-    width: 100%;
     text-align: right;
+    width: 100%;
 }
 
 .inner {
@@ -418,18 +415,19 @@ a.link:hover {
 
 tbody {
     display: block;
-    height: 550px;
+    height: auto;
+    max-height: 550px;
     overflow: auto;
 }
 
 thead, tbody tr {
     display: table;
-    width: 100%;
     table-layout: fixed;
+    width: 100%;
 }
 
 thead {
-    width: calc(100% - 1em);
+    width: calc(100%);
 }
 
 

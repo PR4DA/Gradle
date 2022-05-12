@@ -47,13 +47,6 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").hasAnyRole("USER", "ADMIN").antMatchers("/users/*").hasRole("ADMIN").antMatchers("/users/**").hasRole("ADMIN").antMatchers("/users/").hasRole("ADMIN").and().formLogin().loginPage("/showMyLoginPage").loginProcessingUrl("/authenticateTheUser").successHandler(customAuthenticationSuccessHandler).permitAll().and().logout().permitAll().and().exceptionHandling().accessDeniedPage("/access-denied");
     }
 
-    //beans
-    //bcrypt bean definition
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     //authenticationProvider bean definition
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -61,6 +54,13 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.setUserDetailsService(userService); //set the custom user details service
         auth.setPasswordEncoder(passwordEncoder()); //set the password encoder - bcrypt
         return auth;
+    }
+
+    //beans
+    //bcrypt bean definition
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }

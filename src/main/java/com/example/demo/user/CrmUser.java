@@ -42,7 +42,7 @@ public class CrmUser {
     private List<Role> roles = new LinkedList<>();
 
     public CrmUser() {
-
+        // Temp user
     }
 
     public void addRole(Role role) {

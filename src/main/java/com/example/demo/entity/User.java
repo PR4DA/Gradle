@@ -156,31 +156,57 @@ public class User implements Serializable {
         this.messages = messages;
     }
 
-    public String getLastMessage() {
+    public String getFileUrl() {
         try {
-            int lastIdx = messages.size() - 1;
-            ChatMessage lastElement = messages.get(lastIdx);
-            return lastElement.toString();
+            deleteFile("src/main/resources/static/files/" + this.userName + ".txt");
         } catch (Exception e) {
-            return "No messages yet";
+            e.printStackTrace();
+        } finally {
+            File file = createFile();
+            if (file != null) {
+                try {
+                    file = writeFile(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    return file.getAbsolutePath();
+                }
+            }
+            return "file.getAbsolutePath()";
         }
     }
 
-    public String getFirstMessage() {
+    void deleteFile(String path) {
         try {
-            ChatMessage firstElement = messages.get(0);
-            return firstElement.toString();
-        } catch (Exception e) {
-            return "No messages yet";
+            Files.delete(Path.of(path));
+        } catch (NoSuchFileException x) {
+            System.err.format("%s: no such" + " file or directory%n", path);
+        } catch (DirectoryNotEmptyException x) {
+            System.err.format("%s not empty%n", path);
+        } catch (IOException x) {
+            // File permission problems are caught here.
+            System.err.println(x);
         }
     }
 
-    public int getNormalMessageLength() {
-        int aetmltg = 0;
-        for (ChatMessage mssg : this.messages) {
-            aetmltg += mssg.getContent().length();
+    public File createFile() {
+        try {
+            File myObj = new File("src/main/resources/static/files", this.userName + ".txt");
+            if (myObj.createNewFile()) {
+                return myObj;
+            } else {
+                return null;
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+            return null;
         }
-        return (int) aetmltg / this.messages.size();
+    }
+
+    public File writeFile(File file) throws IOException {
+        Files.writeString(Path.of(file.getAbsolutePath()), getReport());
+        return file;
     }
 
     public String getReport() {
@@ -204,63 +230,36 @@ public class User implements Serializable {
         return report;
     }
 
-    public File createFile() {
-        try {
-            File myObj = new File("src/main/resources/static/files", this.userName + ".txt");
-            if (myObj.createNewFile()) {
-                return myObj;
-            } else {
-                return null;
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public File writeFile(File file) throws IOException {
-        Files.writeString(Path.of(file.getAbsolutePath()), getReport());
-        return file;
-    }
-
-    void deleteFile(String path) {
-        try {
-            Files.delete(Path.of(path));
-        } catch (NoSuchFileException x) {
-            System.err.format("%s: no such" + " file or directory%n", path);
-        } catch (DirectoryNotEmptyException x) {
-            System.err.format("%s not empty%n", path);
-        } catch (IOException x) {
-            // File permission problems are caught here.
-            System.err.println(x);
-        }
-    }
-
-    public String getFileUrl() {
-        try {
-            deleteFile("src/main/resources/static/files/" + this.userName + ".txt");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            File file = createFile();
-            if (file != null) {
-                try {
-                    file = writeFile(file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    return file.getAbsolutePath();
-                }
-            }
-            return "file.getAbsolutePath()";
-        }
-    }
-
-
     @Override
     public String toString() {
         return "u: " + userName + "- messages sent list \n\nid: " + id + "\troles: " + roles + "\n" + "Name: " + firstName + " \n" + "Surname: " + lastName + "\n" + "Email: " + email;
+    }
+
+    public String getFirstMessage() {
+        try {
+            ChatMessage firstElement = messages.get(0);
+            return firstElement.toString();
+        } catch (Exception e) {
+            return "No messages yet";
+        }
+    }
+
+    public String getLastMessage() {
+        try {
+            int lastIdx = messages.size() - 1;
+            ChatMessage lastElement = messages.get(lastIdx);
+            return lastElement.toString();
+        } catch (Exception e) {
+            return "No messages yet";
+        }
+    }
+
+    public int getNormalMessageLength() {
+        int aetmltg = 0;
+        for (ChatMessage mssg : this.messages) {
+            aetmltg += mssg.getContent().length();
+        }
+        return (int) aetmltg / this.messages.size();
     }
 
 

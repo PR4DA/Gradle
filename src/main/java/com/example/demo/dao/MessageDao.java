@@ -7,11 +7,6 @@ import java.util.List;
 
 public interface MessageDao extends JpaRepository<ChatMessage, Long> {
 
-    //    List<ChatMessage> findAllAndOrderByTimestamp();
-    List<ChatMessage> findAllBySenderOrderByTimestamp(String sender);
-
     List<ChatMessage> deleteAllBySender(String sender);
-
-    List<ChatMessage> findChatMessagesByContent(String content);
 
 }
