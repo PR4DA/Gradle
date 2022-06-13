@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.utils;
 
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;

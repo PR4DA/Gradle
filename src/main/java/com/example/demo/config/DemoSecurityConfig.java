@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
 import com.example.demo.service.UserService;
+import com.example.demo.utils.CustomAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Lazy
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    private DaoAuthenticationProvider auth;
 
     @Autowired
     public DemoSecurityConfig(@Lazy UserService userService, @Lazy CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
